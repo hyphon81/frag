@@ -176,7 +176,7 @@ proc render*(this: Graphics) =
   let frameTime = float((current - lastTime) * 1000) / float sdl.getPerformanceFrequency()
   lastTime = current
 
-  #discard bgfx_touch(0)
+  bgfx_touch(0)
 
   bgfx_dbg_text_printf(1, 1, 0x0f, "Frame: %7.3f[ms] FPS: %7.3f", float32(frameTime), (1.0 / frameTime) * 1000)
 

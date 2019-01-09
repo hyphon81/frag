@@ -200,7 +200,7 @@ proc render*(imgui: var IMGUI) =
         bgfx_set_transient_vertex_buffer(0, addr tvb, 0, vertexCount )
         bgfx_set_transient_index_buffer( addr tib, offset, cmd.elem_count)
 
-        #discard bgfx_submit(imgui.viewId, imgui.dev.sph, 0, false)
+        bgfx_submit(imgui.viewId, imgui.dev.sph, 0, false)
 
         offset += cmd.elem_count
 

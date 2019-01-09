@@ -73,7 +73,7 @@ proc flush(spriteBatch: SpriteBatch) =
   else:
     bgfx_set_state(BGFX_STATE_DEFAULT, 0)
 
-  #discard bgfx_submit(spriteBatch.view, spriteBatch.programHandle, 0, false)
+  bgfx_submit(spriteBatch.view, spriteBatch.programHandle, 0, false)
 
   spriteBatch.vertices.setLen(0)
 

@@ -68,12 +68,12 @@ proc flush(spriteBatch: SpriteBatch) =
   discard bgfx_set_transform(addr mtx[0], 1)
 
   if spriteBatch.blendingEnabled:
-    bgfx_set_state(0'u64 or BGFX_STATE_RGB_WRITE or BGFX_STATE_ALPHA_WRITE or BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_SRC_ALPHA
+    bgfx_set_state(0'u64 or BGFX_STATE_WRITE_RGB or BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_SRC_ALPHA
       , BGFX_STATE_BLEND_INV_SRC_ALPHA), 0)
   else:
     bgfx_set_state(BGFX_STATE_DEFAULT, 0)
 
-  discard bgfx_submit(spriteBatch.view, spriteBatch.programHandle, 0, false)
+  #discard bgfx_submit(spriteBatch.view, spriteBatch.programHandle, 0, false)
 
   spriteBatch.vertices.setLen(0)
 

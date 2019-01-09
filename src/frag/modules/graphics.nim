@@ -5,7 +5,7 @@ import
 
 import
   bgfxdotnim as bgfx,
-  bgfxdotnim.platform,
+  bgfxdotnim/platform,
   sdl2 as sdl
 
 import
@@ -140,11 +140,13 @@ proc init*(
   if not linkSDL2BGFX(this.rootWindow.handle):
     return false
 
-  if not bgfx_init(BGFX_RENDERER_TYPE_COUNT, 0'u16, 0, nil, nil):
+  var init: bgfx_init_t
+  bgfx_init_ctor(addr(init))
+  if not bgfx_init(addr(init)):
     logError("Error initializng BGFX.")
 
   let size = sdl.getSize(this.rootWindow.handle)
-  bgfx_reset(size.x.uint32, size.y.uint32, BGFX_RESET_VSYNC)
+  bgfx_reset(size.x.uint32, size.y.uint32, BGFX_RESET_VSYNC, init.resolution.format)
   bgfx_set_view_rect(0, 0, 0, size.x.uint16, size.y.uint16)
 
   bgfx_set_debug(debugMode)
@@ -174,7 +176,7 @@ proc render*(this: Graphics) =
   let frameTime = float((current - lastTime) * 1000) / float sdl.getPerformanceFrequency()
   lastTime = current
 
-  discard bgfx_touch(0)
+  #discard bgfx_touch(0)
 
   bgfx_dbg_text_printf(1, 1, 0x0f, "Frame: %7.3f[ms] FPS: %7.3f", float32(frameTime), (1.0 / frameTime) * 1000)
 
@@ -187,8 +189,13 @@ proc onWindowResize*(this: Graphics, event: sdl.Event) {.procvar.} =
 
   when defined(android):
     discard linkSDL2BGFX(this.rootWindow.handle)
-    
-  bgfx_reset(width, height, BGFX_RESET_VSYNC)
+
+  var init: bgfx_init_t
+  bgfx_init_ctor(addr(init))
+  if not bgfx_init(addr(init)):
+    logError("Error initializng BGFX.")
+
+  bgfx_reset(width, height, BGFX_RESET_VSYNC, init.resolution.format)
 
 proc onUnpause*(this: Graphics, event: sdl.Event) {.procvar.} =
   when defined(android):

@@ -74,7 +74,7 @@ proc loadPNG*(filename: string) : Texture =
 
     texture.data = stbi.load(filename, texture.width, texture.height, texture.channels, stbi.Default)
 
-  if texture.data.isNil:
+  if texture.data == @[]:
     logError "Error loading Texture! " & filename
     return
 

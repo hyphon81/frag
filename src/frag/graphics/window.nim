@@ -27,7 +27,7 @@ proc init*(
   width, height: int,
   flags: uint32
 ) =
-  let windowTitle = if title.isNil: "FRAG - " & globals.version
+  let windowTitle = if title == "": "FRAG - " & globals.version
     else: title
 
   window.handle = sdl.createWindow(

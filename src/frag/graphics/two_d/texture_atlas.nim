@@ -52,7 +52,7 @@ proc loadTextureAtlas(shortPath: string, filename: string): AtlasInfo =
         atlas.regionInfos.add(region)
       of cfgKeyValuePair:
         if e.key == "name":
-          if atlas.textureFilename.isNil:
+          if atlas.textureFilename == "":
             atlas.textureFilename = e.value
       of cfgError:
         logError("Cfg parsing error : " & e.msg)
@@ -73,4 +73,3 @@ proc load*(shortPath: string, filename: string): auto =
     logWarn "Extension : " & ext & " not recognized."
     return
   loadTextureAtlas(shortPath, filename)
-    

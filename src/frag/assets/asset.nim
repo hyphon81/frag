@@ -18,7 +18,7 @@ import
 import
   bgfxdotnim as bgfx,
   sdl2 as sdl,
-  sound.sound as snd
+  sound/sound as snd
 
 import
   asset_types

@@ -58,7 +58,7 @@ else:
 
   proc init*(logFileName: string) =
     consoleLogger = newConsoleLogger()
-    if logFileName.isNil:
+    if logFileName == "":
       fileLogger = newFileLogger(defaultLogFileName)
     else:  
       fileLogger = newFileLogger(logFileName)

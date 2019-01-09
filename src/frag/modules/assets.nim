@@ -28,7 +28,7 @@ export
 const maxWorkers = 4
 
 proc init*(self: AssetManager, config: Config): bool =
-  let appAssetRoot = if config.assetRoot.isNil: globals.defaultAppAssetRoot
+  let appAssetRoot = if config.assetRoot == "": globals.defaultAppAssetRoot
     else: config.assetRoot
   self.assetLoadsInProgress = initTable[Hash, FlowVarBase]()
   self.assetLoadRequests = initDeque[AssetLoadRequest]()
@@ -142,7 +142,7 @@ proc atlasInfoReady(self: AssetManager, assetId: Hash, assetLoadInProgress: Flow
   let atlasInfo = cast[FlowVar[AtlasInfo]](assetLoadInProgress).`^`()
           
   let atlasDir = splitFile(atlasInfo.atlas.atlasShortPath).dir
-  let texturePath = atlasDir & DirSep &  atlasInfo.atlas.textureFilename
+  let texturePath = atlasDir & DirSep & atlasInfo.atlas.textureFilename
 
   let atlasTexture = get[Texture](self, hash(texturePath))
   if atlasTexture.isNil:

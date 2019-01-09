@@ -1,5 +1,5 @@
 import
-  sound.sound as snd
+  sound/sound as snd
 
 import
   ../assets/asset_types,

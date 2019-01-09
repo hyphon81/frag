@@ -189,7 +189,7 @@ proc render*(imgui: var IMGUI) =
         #discard bgfx_set_scissor(scissorX, scissorY, scissorW, scissorH)
 
 
-        bgfx_set_state( BGFX_STATE_RGB_WRITE or BGFX_STATE_ALPHA_WRITE or
+        bgfx_set_state( BGFX_STATE_WRITE_RGB or
                             BGFX_STATE_BLEND_FUNC( BGFX_STATE_BLEND_SRC_ALPHA, BGFX_STATE_BLEND_INV_SRC_ALPHA ), 0)
 
         if not cmd.texture.isNil:
@@ -200,7 +200,7 @@ proc render*(imgui: var IMGUI) =
         bgfx_set_transient_vertex_buffer(0, addr tvb, 0, vertexCount )
         bgfx_set_transient_index_buffer( addr tib, offset, cmd.elem_count)
 
-        discard bgfx_submit(imgui.viewId, imgui.dev.sph, 0, false)
+        #discard bgfx_submit(imgui.viewId, imgui.dev.sph, 0, false)
 
         offset += cmd.elem_count
 

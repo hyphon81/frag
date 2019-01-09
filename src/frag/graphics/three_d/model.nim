@@ -93,7 +93,7 @@ proc processMesh(scene: PScene, model: var Model, mesh: PMesh) =
   
     inc(model.numVertices)
 
-  m.indices = newSeq[uint16](mesh.faceCount* 3)
+  m.indices = newSeq[uint16](mesh.faceCount * 3)
   for i in 0..<mesh.faceCount:
     let indices = mesh.faces[i].indices
     assert mesh.faces[i].indexCount == 3

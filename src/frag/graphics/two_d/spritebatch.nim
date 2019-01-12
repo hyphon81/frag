@@ -265,6 +265,7 @@ proc dispose*(spriteBatch: SpriteBatch) =
   bgfx_destroy_index_buffer(spriteBatch.ibh)
   let rendererType = bgfx_get_renderer_type()
   if rendererType in [BGFX_RENDERER_TYPE_OPENGL, BGFX_RENDERER_TYPE_OPENGLES]:
-    bgfx_destroy_program(spriteBatch.programHandle)
+    if spriteBatch.programHandle.idx != 65535'u16:
+      bgfx_destroy_program(spriteBatch.programHandle)
 
   freeShared(spriteBatch.vDecl)

@@ -16,7 +16,8 @@ import
   ../../../src/frag/graphics/two_d/texture,
   ../../../src/frag/graphics/window,
   ../../../src/frag/gui/themes/gui_themes,
-  ../../../src/frag/modules/assets
+  ../../../src/frag/modules/assets,
+  ../../../src/frag/utils/viewport
 
 type
   App = ref object
@@ -78,6 +79,8 @@ proc initApp(app: App, ctx: Frag) =
   app.guiCamera.ortho(1.0, WIDTH, HEIGHT, true)
 
   gui.setCamera(ctx.gui, app.guiCamera)
+  gui.setWindow(ctx.gui, Window())
+  gui.setViewport(ctx.gui, Viewport())
   gui.setTheme(ctx.gui, GUITheme.White)
 
   logDebug "App initialized."

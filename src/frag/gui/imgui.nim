@@ -208,8 +208,11 @@ proc render*(imgui: var IMGUI) =
   imgui.ctx.clear()
 
 proc dispose*(imgui: var IMGUI) =
-  bgfx_destroy_texture(imgui.dev.fah)
-  bgfx_destroy_uniform(imgui.dev.uh)
-  bgfx_destroy_program(imgui.dev.sph)
+  if imgui.dev.fah.idx != 65535'u16:
+    bgfx_destroy_texture(imgui.dev.fah)
+  if imgui.dev.uh.idx != 65535'u16:
+    bgfx_destroy_uniform(imgui.dev.uh)
+  if imgui.dev.sph.idx != 65535'u16:
+    bgfx_destroy_program(imgui.dev.sph)
 
   freeShared(imgui.dev.vdecl)
